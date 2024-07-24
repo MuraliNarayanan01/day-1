@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Palindrome</title>
+    <script>
+         function pattern()
+        {
+            var n = parseInt(document.getElementById("input").value);
+            var result = " ";
+            for(var i=0;i<=n;i++) 
+            {
+            for(var j=0;j<=i;j++) 
+            {
+                result+= "* " ;
+            }
+            result+= "<br>";
+        }
+        document.getElementById("output").innerHTML=result;
+    }
+    </script>
+</head>
+<body >
+    
+        <h3>*pattern printer</h3>
+        <input type="text" id="input">
+        <p id="output"></p>
+        <button onclick="pattern()">print</button>
+    
+</body>
+</html>

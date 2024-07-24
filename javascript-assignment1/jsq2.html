@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Palindrome</title>
+    <script>
+        function Palindrome() {
+            let i = document.getElementById("input").value;
+            let r = i.split(" ").reverse().join(" ");
+            if (i.toLowerCase() == r.toLowerCase()) {
+                document.getElementById("output").innerHTML = "palindrome";
+            } else {
+                document.getElementById("output").innerHTML = "Not a palindrome";
+            }
+        }
+    </script>
+</head>
+<body style="border: 2px solid black;">
+    <center>
+        <h3>Palindrome or not a palindrome</h3>
+        <input type="text" id="input">
+        <p id="output"></p>
+        <button onclick="Palindrome()">Check</button>
+    </center>
+</body>
+</html>
