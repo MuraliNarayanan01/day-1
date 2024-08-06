@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body><br><br><br>
+    <h1>Employee Management System</h1>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <form #myForm="ngForm">
+            <div class="form-group">
+              <label for="Employee Id"> Employee id </label>
+              <input
+                type="text"
+                class="form-control"
+                name="id"
+                #id="ngModel"
+                ngModel
+                required
+                pattern="[0-9]+"
+              />
+              <div *ngIf="id.touched">
+                <div *ngIf="id.errors?.['required']">
+                  <font color="red"><b>Employee Id Required</b></font>
+                </div>
+                <div *ngIf="id.errors?.['pattern']">
+                  <font color="red"><b>Wrong input</b></font>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="Employee Name"> Employee Name </label>
+              <input
+                type="text"
+                class="form-control"
+                name="empName"
+                #empName="ngModel"
+                ngModel
+              />
+            </div>
+            <div class="form-group">
+              <label for="Employee Salary">Employee Salary  </label>
+              <input
+                type="text"
+                class="form-control"
+                name="empSalary"
+                #empSalary="ngModel"
+                ngModel
+              />
+            </div>
+
+            <button class="btn btn-success" (click)="insertEmployee(myForm.value)">Insert</button>
+            &nbsp;&nbsp;
+            <button class="btn btn-primary" (click)="updateEmployee(myForm.value)">Update</button>&nbsp;&nbsp;
+            <button class="btn btn-danger" (click)="deleteEmployee(myForm.value)">Delete</button>&nbsp;&nbsp;
+            <button class="btn btn-warning">Find</button>
+            &nbsp;&nbsp;
+            <button class="btn btn-info" (click)="findallemployee()">Find All</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <h3>{{ result }}</h3>
+
+    <div *ngIf="flag">
+      <table border="1">
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>salary</th>
+        </tr>
+        <tr *ngFor="let item of employeeArr">
+          <td>{{item.id}}</td>
+          <td>{{item.empName}}</td>
+          <td>{{item.empsalary}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf="findflag">
+      <table border="1">
+        <tr>
+          <th>id</th>
+          <th>name</th>
+          <th>salary</th>
+    
+        </tr>
+        <tr>
+          <td>
+            <p>{{employeefind.id}}</p>
+          </td>
+          <td>
+    
+            <p>{{employeefind.empName}}</p>
+          </td>
+          <td>
+    
+            <p>{{employeefind.empsalary}}</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+   
+  </body>
+</html>

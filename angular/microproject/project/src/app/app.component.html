@@ -1,0 +1,168 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<style>
+  body {
+    background-color: #5f5b5b;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .container {
+    background-color: rgb(196, 188, 188);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+  }
+
+  .form-group label {
+    font-weight: bold;
+  }
+
+  .form-control {
+    border-radius: 4px;
+    box-shadow: none;
+    border: 1px solid #ced4da;
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .btn {
+    border-radius: 4px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+
+  .btn:hover {
+    opacity: 0.8;
+  }
+
+  .btn-success:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .btn-warning:hover {
+    background-color: #ffc107;
+    color: #fff;
+  }
+
+  .btn-info:hover {
+    background-color: #17a2b8;
+    color: #fff;
+  }
+</style>
+<title>Daily News Update</title>
+
+<body>
+  <div class="header">
+    <h1>Daily News</h1>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <form #newsForm="ngForm">
+          <div class="form-group">
+            <label for="newsTitle"> News Title </label>
+            <input type="text" class="form-control" name="newsTitle" #newsTitle="ngModel" ngModel required />
+            <div *ngIf="newsTitle.touched">
+              <div *ngIf="newsTitle.errors?.['required']">
+                <font color="red"><b>News Title Required</b></font>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="id"> Author ID</label>
+            <input type="text" class="form-control" name="id" ngModel />
+          </div>
+          <div class="form-group">
+            <label for="author"> Author Name </label>
+            <input type="text" class="form-control" name="author" ngModel />
+          </div>
+          <div class="form-group">
+            <label for="date"> Date </label>
+            <input type="text" class="form-control" name="date" ngModel />
+          </div>
+          <div class="form-group">
+            <label for="content"> Content </label>
+            <textarea class="form-control" name="content" ngModel rows="5"></textarea>
+          </div>
+
+          <button class="btn btn-success" (click)="insertNews(newsForm.value)">Add News</button>
+          &nbsp;&nbsp;
+          <button class="btn btn-primary" (click)="update(newsForm.value)">Update News</button>&nbsp;&nbsp;
+          <button class="btn btn-danger" (click)="delete(newsForm.value.id)">Delete News</button>&nbsp;&nbsp;
+          <button class="btn btn-warning" (click)="find(newsForm.value.id)">Find News</button>
+          &nbsp;&nbsp;
+          <button class="btn btn-info" (click)="findAll()">Find All News</button>
+        </form>
+      </div>
+
+      <div *ngIf="flag">
+        <table border="1">
+          <tr>
+            <th>id</th>
+            <th>newsTitle</th>
+            <th>author</th>
+            <th>date</th>
+            <th>content</th>
+          </tr>
+          <tr *ngFor="let item of newsArr | async">
+            <td>{{item.id}}</td>
+            <td>{{item.newsTitle}}</td>
+            <td>{{item.author}}</td>
+            <td>{{item.date}}</td>
+            <td>{{item.content}}</td>
+          </tr>
+        </table>
+      </div>
+
+
+
+      <div *ngIf="findflag">
+        <table border="1">
+          <tr>
+            <th>id</th>
+            <th>newsTitle</th>
+            <th>author</th>
+            <th>date</th>
+            <th>content</th>
+          </tr>
+          <tr>
+            <td>{{news.id}}</td>
+            <td>{{news.newsTitle}}</td>
+            <td>{{news.author}}</td>
+            <td>{{news.date}}</td>
+            <td>{{news.content}}</td>
+          </tr>
+        </table>
+      </div>
+
+
+
+    </div>
+  </div>
+</body>
